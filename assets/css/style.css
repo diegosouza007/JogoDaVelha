@@ -2,3 +2,25 @@
     margin: 0;
     padding: 0;
 }
+
+:root {
+    font-size: 62.5%;
+    /* font-family: 'Indie Flower', cursive; */
+    /* font-family: 'Permanent Marker', cursive; */
+    --dark-green: #264653;
+    --green: #2a9d8f;
+    --yellow: #e9c46a;
+    --light-orange: #f4a261;
+    --orange: #e76f51;
+    --white: #FFFFFF;
+}
+
+body {
+    background: var(--yellow);
+}
+
+#title {
+    color: var(--orange);
+    font-size: 6.5rem;
+    font-family: 'Permanent Marker', cursive;
+}
