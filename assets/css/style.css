@@ -5,22 +5,115 @@
 
 :root {
     font-size: 62.5%;
-    /* font-family: 'Indie Flower', cursive; */
-    /* font-family: 'Permanent Marker', cursive; */
+    --hover: #56b2a7;
     --dark-green: #264653;
     --green: #2a9d8f;
-    --yellow: #e9c46a;
-    --light-orange: #f4a261;
-    --orange: #e76f51;
-    --white: #FFFFFF;
+    --white: #f8f9fa;
+    --cell-size: 12rem;
+    --symbol-size: calc(var(--cell-size) * 0.9);
 }
 
 body {
-    background: var(--yellow);
+    background: var(--green);
 }
 
 #title {
-    color: var(--orange);
-    font-size: 6.5rem;
-    font-family: 'Permanent Marker', cursive;
+    color: var(--white);
+    font: 700 6.5rem 'Permanent Marker', cursive;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0 7rem 0;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+}
+
+.cell {
+    position: relative;
+    display: flex;
+    height: var(--cell-size);
+    width: var(--cell-size);
+    border: .9rem solid var(--dark-green);
+    font: 400 var(--symbol-size) 'Roboto', sans-serif;
+    color: var(--white);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cell:nth-child(-n + 9) {
+    border-top: none;
+    border-left: none;
+}
+
+.cell:nth-child(n + 7) {
+    border-bottom: none;
+}
+
+.cell:nth-child(3n +3) {
+    border-right: none;
+}
+
+.cell.x::after,
+.cell.x::before,
+.cell.o::before {
+    background-color: var(--white);
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+    background-color: var(--hover);
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after,
+.cell.x::after,
+.cell.x::before {
+    position: absolute;
+    content: "";
+    width: calc(var(--symbol-size) * 0.2);
+    height: var(--symbol-size);
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.cell.x::after {
+    transform: rotate(45deg);
+}
+
+.board.x .cell:not(.x):not(.o):hover::after,
+.cell.x::before {
+    transform: rotate(-45deg);
+}
+
+.cell.o::after,
+.cell.o::before {
+    position: absolute;
+    content: "";
+    width: var(--symbol-size);
+    height: var(--symbol-size);
+    background-color: var(--white);
+    border-radius: 50%;
+}
+
+.cell.o::before {
+    width: calc(var(--symbol-size) * 0.9);
+    height: calc(var(--symbol-size) * 0.9);
+    background-color: var(--white);
+}
+
+.cell.o::after {
+    width: calc(var(--symbol-size) * 0.5);
+    height: calc(var(--symbol-size) * 0.5);
+    background-color: var(--green);
+}
+
+.cell.x,
+.cell.o {
+    cursor: not-allowed;
 }
