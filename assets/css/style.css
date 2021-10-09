@@ -17,6 +17,15 @@ body {
     background: var(--green);
 }
 
+
+/* reset button */
+
+body>div {
+    position: absolute;
+    right: 5rem;
+    bottom: 5rem;
+}
+
 #title {
     color: var(--white);
     font: 700 6.5rem 'Permanent Marker', cursive;
