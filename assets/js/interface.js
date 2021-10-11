@@ -18,6 +18,10 @@ function handleClick(event) {
     let cell = event.target;
     let position = cell.getAttribute('id');
 
+    if (gameOver) {
+        return;
+    }
+
     handleMove(position);
     insertSymbolOnBoard();
     toggleBoardHoverSymbol();
@@ -39,6 +43,9 @@ function insertSymbolOnBoard() {
             cell.classList.add(flag);
         }
     })
+
+    gameOver = isWinner();
+
 }
 
 // Switch between X or O the hover effect in the cells 
@@ -75,5 +82,28 @@ function resetGame() {
     }
 
     clearVariables();
+}
 
+// Check if there is a winner
+
+function isWinner() {
+
+    for (let i = 0; i < winnerSequences.length; i++) {
+
+        let number = winnerSequences[i];
+
+        let firstNumber = number[0];
+        let secondNumber = number[1];
+        let thirdNumber = number[2];
+
+        if (board[firstNumber] == board[secondNumber] &&
+            board[firstNumber] == board[thirdNumber] &&
+            board[firstNumber] != '') {
+            setTimeout(() => {
+                alert(`O vencedor foi ${board[firstNumber]}`)
+            }, 20);
+            return true;
+        }
+    }
+    return false;
 }
