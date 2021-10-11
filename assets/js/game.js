@@ -3,6 +3,7 @@
 let board = ['', '', '', '', '', '', '', '', ''];
 let playerTurn = 0;
 let flags = ['x', 'o'];
+let gameOver = false;
 const winnerSequences = [
     [0, 1, 2],
     [3, 4, 5],
@@ -26,10 +27,5 @@ function handleMove(position) {
 function clearVariables() {
     board = ['', '', '', '', '', '', '', '', ''];
     playerTurn = 0;
-}
-
-// Check if there is a winner
-
-function isWinner() {
-
+    gameOver = false;
 }
