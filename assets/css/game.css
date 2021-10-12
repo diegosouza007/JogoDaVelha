@@ -1,40 +1,26 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-:root {
-    font-size: 62.5%;
-    --hover: #56b2a7;
-    --dark-green: #264653;
-    --green: #2a9d8f;
-    --white: #f8f9fa;
-    --cell-size: 12rem;
-    --symbol-size: calc(var(--cell-size) * 0.9);
-}
-
-body {
-    background: var(--green);
-}
-
-
 /* reset button */
 
-body>div {
+#reset {
     position: absolute;
     right: 5rem;
     bottom: 5rem;
 }
 
-#title {
-    color: var(--white);
-    font: 700 6.5rem 'Permanent Marker', cursive;
+#back {
+    position: absolute;
+    left: 5rem;
+    top: 5rem;
 }
 
-header {
+#container {
     display: flex;
     justify-content: center;
-    margin: 3rem 0 7rem 0;
+    align-items: center;
+    position: relative;
+}
+
+a {
+    cursor: pointer;
 }
 
 .board {

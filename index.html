@@ -5,10 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <!-- JS -->
-    <script defer src="./assets/js/game.js"></script>
-    <script defer src="./assets/js/interface.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,29 +17,14 @@
 </head>
 
 <body>
-
-    <header>
-        <h1 id="title">Jogo da Velha</h1>
-    </header>
-
-    <main class="board x">
-        <div id="0" class="cell"></div>
-        <div id="1" class="cell"></div>
-        <div id="2" class="cell"></div>
-        <div id="3" class="cell"></div>
-        <div id="4" class="cell"></div>
-        <div id="5" class="cell"></div>
-        <div id="6" class="cell"></div>
-        <div id="7" class="cell"></div>
-        <div id="8" class="cell"></div>
-    </main>
-
-    <div id="reset">
-        <a href="#"><img src="./assets/img/icons8-reset-50.png" alt="Recomeçar novamente" title="Recomeçar novamente"></a>
+    <div class="content">
+        <header>
+            <h1 id="title">Jogo da Velha</h1>
+        </header>
+        <button id="play">PLAY</button>
     </div>
-
-    <div class="winner-modal"></div>
-
+    <!-- Modal - Choose an option (BOT or PvP) -->
+    <div id="menu-modal"></div>
 </body>
 
 </html>
