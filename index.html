@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- CSS -->
     <link rel="stylesheet" href="./assets/css/main.css">
+    <!-- JavaScript -->
+    <script defer src="./assets/js/main.js"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,13 +20,28 @@
 
 <body>
     <div class="content">
+        <!-- Volume control -->
+        <div>
+            <img id="volume" src="./assets/img/icons8-audio-50.png" alt="Sound Volume" width="32px" height="32px">
+            <audio id="music" src="./assets/songs/Ninja-Toad.ogg"></audio>
+        </div>
+        <!-- Game title -->
         <header>
             <h1 id="title">Jogo da Velha</h1>
         </header>
-        <button id="play">PLAY</button>
+        <!-- Play Button -->
+        <button id="play">PLAY
+            <audio id="sound-play" src="./assets/songs/play-sound-effect.ogg"></audio>
+        </button>
     </div>
     <!-- Modal - Choose an option (BOT or PvP) -->
-    <div id="menu-modal"></div>
+    <div class="menu-modal">
+        <span id="close">X</span>
+        <div id="option-pve">Jogar contra um BOT - PvE
+            <audio class="select" src="./assets/songs/"></audio>
+        </div>
+        <div id="option-pvp">Jogar contra um amigo - PvP</div>
+    </div>
 </body>
 
 </html>
