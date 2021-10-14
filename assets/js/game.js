@@ -4,6 +4,11 @@ let board = ['', '', '', '', '', '', '', '', ''];
 let playerTurn = 0;
 let flags = ['x', 'o'];
 let gameOver = false;
+
+// Receive the selected mode - PvE or PvP
+
+let gameType = JSON.parse(localStorage.getItem("GameType"));
+
 const winnerSequences = [
     [0, 1, 2],
     [3, 4, 5],
