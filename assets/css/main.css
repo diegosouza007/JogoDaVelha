@@ -76,7 +76,7 @@ button {
 #volume {
     position: absolute;
     top: 5rem;
-    right: 5rem;
+    right: -3rem;
     cursor: pointer;
 }
 
