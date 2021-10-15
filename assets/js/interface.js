@@ -18,7 +18,7 @@ function handleClick(event) {
     let cell = event.target;
     let position = cell.getAttribute('id');
 
-    if (gameOver) {
+    if (isGameOver) {
         return;
     }
 
@@ -26,6 +26,9 @@ function handleClick(event) {
     insertSymbolOnBoard();
     toggleBoardHoverSymbol();
 
+    if (gameMode === 'pve') {
+        setTimeout(() => letsGoBot(), 300);
+    }
 }
 
 // Function on being called, put X or O when clicking on a cell 
@@ -44,8 +47,7 @@ function insertSymbolOnBoard() {
         }
     })
 
-    gameOver = isWinner();
-
+    isGameOver = isWinner();
 }
 
 // Switch between X or O the hover effect in the cells 
@@ -61,7 +63,6 @@ function toggleBoardHoverSymbol() {
         board.classList.remove('o');
         board.classList.add('x');
     }
-
 }
 
 // Clear all cells and start a new game
@@ -106,4 +107,28 @@ function isWinner() {
         }
     }
     return false;
+}
+
+
+// ---------------- BOT FUNCTIONS ---------------- //
+
+
+function letsGoBot() {
+
+    for (let num = 0; num < board.length; num++) {
+        if (board[num] === '') {
+            setTimeout(() => {
+
+                if (isGameOver) {
+                    return;
+                }
+
+                handleMove(num);
+                insertSymbolOnBoard();
+                toggleBoardHoverSymbol();
+            }, 300);
+            console.log(board[num].indexOf())
+            return true;
+        }
+    }
 }
