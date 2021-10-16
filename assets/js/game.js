@@ -1,13 +1,18 @@
-// Model - MVC pattern
+// PlayerTurn: The Player is 0 value and BOT is 1 value
 
-let board = ['', '', '', '', '', '', '', '', ''];
-let playerTurn = 0;
-let flags = ['x', 'o'];
-let gameOver = false;
 
-// Receive the selected mode - PvE or PvP
+let controls = {
+    board: ['', '', '', '', '', '', '', '', ''],
+    playerTurn: 0,
+    flags: ['x', 'o'],
+    isGameOver: false,
+    score: [0, 0]
+}
 
-let gameType = JSON.parse(localStorage.getItem("GameType"));
+// Receive the selected mode: PvE or PvP
+
+
+let gameMode = JSON.parse(localStorage.getItem("GameMode"));
 
 const winnerSequences = [
     [0, 1, 2],
@@ -22,15 +27,17 @@ const winnerSequences = [
 
 // Add the flags in the board and change the game turn
 
+
 function handleMove(position) {
-    board[position] = flags[playerTurn];
-    playerTurn === 0 ? playerTurn = 1 : playerTurn = 0;
+    controls.board[position] = controls.flags[controls.playerTurn];
+    controls.playerTurn === 0 ? controls.playerTurn = 1 : controls.playerTurn = 0;
 }
 
 // Change the main variables to default state
 
+
 function clearVariables() {
-    board = ['', '', '', '', '', '', '', '', ''];
-    playerTurn = 0;
-    gameOver = false;
+    controls.board = ['', '', '', '', '', '', '', '', ''];
+    controls.playerTurn = 0;
+    controls.isGameOver = false;
 }

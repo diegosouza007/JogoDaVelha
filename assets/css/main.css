@@ -6,6 +6,7 @@
 
 :root {
     font-size: 62.5%;
+    /* --gray: #303030; */
     --hover: #56b2a7;
     --dark-green: #264653;
     --green: #2a9d8f;
@@ -14,23 +15,15 @@
     --symbol-size: calc(var(--cell-size) * 0.9);
 }
 
-body {
-    display: flex;
-    background: var(--green);
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-}
-
 .content {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    background: var(--green);
+    width: 100vw;
+    height: 100vh;
 }
 
 #title {
@@ -76,7 +69,7 @@ button {
 #volume {
     position: absolute;
     top: 5rem;
-    right: -3rem;
+    right: 5rem;
     cursor: pointer;
 }
 
@@ -97,11 +90,11 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     visibility: visible;
     opacity: 1;
-    background: var(--hover);
+    background: rgba(35, 35, 35, 0.9);
 }
 
 .menu-modal.active>div {
@@ -112,13 +105,14 @@ button {
     width: 80%;
     font: 700 2.5rem 'Roboto', sans;
     color: var(--dark-green);
-    transition: ease-in .2s;
+    transition: ease-in .1s;
+    cursor: pointer;
 }
 
 .menu-modal.active>div:hover {
     border: .5rem solid var(--white);
-    background: var(--green);
-    color: var(--white);
+    background: var(--white);
+    color: var(--green);
 }
 
 .menu-modal.active span {
@@ -126,17 +120,19 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--green);
-    color: var(--white);
+    background: var(--white);
+    color: var(--dark-green);
     width: 4.5rem;
     height: 4.5rem;
     border-radius: .7rem;
     font: 700 3.4rem 'Roboto', sans;
     top: 4rem;
     right: 4rem;
+    cursor: pointer;
     transition: ease-in .1s;
 }
 
 .menu-modal.active span:hover {
+    color: var(--green);
     filter: brightness(1.2);
 }

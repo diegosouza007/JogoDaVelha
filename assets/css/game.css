@@ -1,5 +1,14 @@
 /* reset button */
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--green);
+    width: 100vw;
+    height: 100vh;
+}
+
 #reset {
     position: absolute;
     right: 5rem;
@@ -21,6 +30,10 @@
 
 a {
     cursor: pointer;
+}
+
+.block.allow {
+    cursor: not-allowed;
 }
 
 .board {

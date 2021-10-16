@@ -1,4 +1,5 @@
-// Controller - MVC pattern
+const resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', resetGame);
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -9,16 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-const resetButton = document.getElementById('reset');
-
-resetButton.addEventListener('click', resetGame);
-
 function handleClick(event) {
 
     let cell = event.target;
     let position = cell.getAttribute('id');
 
-    if (isGameOver) {
+    if (controls.isGameOver) {
         return;
     }
 
@@ -27,11 +24,12 @@ function handleClick(event) {
     toggleBoardHoverSymbol();
 
     if (gameMode === 'pve') {
-        setTimeout(() => letsGoBot(), 300);
+        playBotTurn();
     }
 }
 
 // Function on being called, put X or O when clicking on a cell 
+
 
 function insertSymbolOnBoard() {
 
@@ -40,17 +38,25 @@ function insertSymbolOnBoard() {
     cells.forEach(cell => {
 
         let position = cell.getAttribute('id');
-        let flag = board[position];
+        let flag = controls.board[position];
 
         if (flag != '') {
             cell.classList.add(flag);
         }
     })
 
-    isGameOver = isWinner();
+    controls.isGameOver = isWinner();
+
+
+    if (isTiedGame()) {
+        setTimeout(() => { resetGame(); }, 2000);
+    }
+
+
 }
 
 // Switch between X or O the hover effect in the cells 
+
 
 function toggleBoardHoverSymbol() {
 
@@ -66,6 +72,7 @@ function toggleBoardHoverSymbol() {
 }
 
 // Clear all cells and start a new game
+
 
 function resetGame() {
 
@@ -87,6 +94,7 @@ function resetGame() {
 
 // Check if there is a winner
 
+
 function isWinner() {
 
     for (let i = 0; i < winnerSequences.length; i++) {
@@ -97,38 +105,76 @@ function isWinner() {
         let secondNumber = number[1];
         let thirdNumber = number[2];
 
-        if (board[firstNumber] == board[secondNumber] &&
-            board[firstNumber] == board[thirdNumber] &&
-            board[firstNumber] != '') {
+        if (controls.board[firstNumber] == controls.board[secondNumber] &&
+            controls.board[firstNumber] == controls.board[thirdNumber] &&
+            controls.board[firstNumber] != '') {
             setTimeout(() => {
-                alert(`O vencedor foi ${board[firstNumber]}`)
-            }, 20);
+                alert(`O vencedor foi ${controls.board[firstNumber]}`)
+            }, 100);
             return true;
         }
     }
     return false;
 }
 
+// Check if there was a tied
+
+
+function isTiedGame() {
+
+    for (let i = 0; i < controls.board.length; i++) {
+        if (controls.board[i] == '') {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 // ---------------- BOT FUNCTIONS ---------------- //
 
 
-function letsGoBot() {
+function playBotTurn() {
 
-    for (let num = 0; num < board.length; num++) {
-        if (board[num] === '') {
-            setTimeout(() => {
+    let position = getRandomNumber();
 
-                if (isGameOver) {
-                    return;
-                }
+    setTimeout(() => {
 
-                handleMove(num);
-                insertSymbolOnBoard();
-                toggleBoardHoverSymbol();
-            }, 300);
-            console.log(board[num].indexOf())
-            return true;
+        if (controls.isGameOver) {
+            return;
         }
-    }
+
+        handleMove(position);
+        insertSymbolOnBoard();
+        toggleBoardHoverSymbol();
+    }, 1000);
+
+    // return true;
+}
+
+/** Receive the variable board and return a random positon according
+ *          with the empty postions avaible in array
+ **/
+
+let getRandomNumber = function() {
+
+    let pos = '';
+    let num = '';
+    let emptyPos = '';
+    let newArr =
+
+
+        controls.board.map((value, index) => {
+            if (value === '') {
+                emptyPos += index;
+            };
+        })
+
+    newArr = Array.from(emptyPos);
+
+    pos = Math.floor(Math.random() * newArr.length);
+
+    num = newArr[pos];
+
+    return num;
 }

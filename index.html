@@ -23,8 +23,8 @@
     <div class="content">
         <!-- Volume control -->
         <div>
-            <img id="volume" src="./assets/img/icons8-audio-50.png" alt="Sound Volume" width="32px" height="32px">
-            <audio id="music" src="./assets/songs/Ninja-Toad.ogg"></audio>
+            <img id="volume" src="./assets/img/icons8-no-audio-50.png" alt="Sound Volume" width="32px" height="32px">
+            <audio muted id="music" src="./assets/songs/Ninja-Toad.ogg"></audio>
         </div>
         <!-- Game title -->
         <header>
@@ -34,15 +34,16 @@
         <button id="play">PLAY
             <audio id="sound-play" src="./assets/songs/play-sound-effect.ogg"></audio>
         </button>
-    </div>
-    <!-- Modal - Choose an option (BOT or PvP) -->
-    <div class="menu-modal">
-        <span id="close">X</span>
-        <div id="option-pve">Jogar contra um BOT - PvE
-            <audio id="select-pve" src="./assets/songs/select-mode.ogg"></audio>
+
+        <!-- Modal - Choose an option (BOT or PvP) -->
+        <div class="menu-modal">
+            <span id="close">X</span>
+            <div id="option-pve">Jogar contra um BOT - PvE
+                <audio id="select-pve" src="./assets/songs/select-mode.ogg"></audio>
+            </div>
+            <div id="option-pvp">Jogar contra um amigo - PvP
+                <audio id="select-pvp" src="./assets/songs/select-mode.ogg"></audio></div>
         </div>
-        <div id="option-pvp">Jogar contra um amigo - PvP
-            <audio id="select-pvp" src="./assets/songs/select-mode.ogg"></audio></div>
     </div>
 </body>
 

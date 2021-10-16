@@ -24,12 +24,14 @@ let volumeOn = "./assets/img/icons8-audio-50.png";
 let volumeOff = "./assets/img/icons8-no-audio-50.png";
 let gamePage = "game.html"
 
-document.addEventListener('DOMContentLoaded', () => {
-    music.play();
-    music.loop = true;
-})
+
+// Sound controll for the main theme song 
+
 
 volume.addEventListener('click', () => {
+
+    music.play();
+    music.loop = true;
 
     let icon = volume.getAttribute('src').toString();
 
@@ -39,11 +41,14 @@ volume.addEventListener('click', () => {
 
 })
 
+// Play a sound effect when hover the play button
+
+
 play.addEventListener('mouseover', () => {
     soundPlay.play();
 })
 
-// Open the selection Modal - BOT or PvP
+// Open the selection Modal - Choose PvE or PvP mode
 
 
 play.addEventListener('click', () => {
@@ -53,6 +58,9 @@ play.addEventListener('click', () => {
 close.addEventListener('click', () => {
     menuModal.classList.remove('active');
 })
+
+// Play a sound effect when hover the mode options
+
 
 pve.addEventListener('mouseover', () => {
     pveHover.play();
@@ -66,22 +74,18 @@ pvp.addEventListener('mouseover', () => {
 
 
 pve.addEventListener('click', () => {
-
-    let type = 'pve';
-    let storage = localStorage.setItem('GameType', JSON.stringify(type));
-
-    setTimeout(() => {
-        window.open(gamePage, '_self')
-    }, 10)
-
+    loadGamePage("pve");
 })
 
 pvp.addEventListener('click', () => {
+    loadGamePage("pvp");
+})
 
-    let type = 'pvp';
-    let storage = localStorage.setItem('GameType', JSON.stringify(type));
+function loadGamePage(mode) {
+
+    localStorage.setItem('GameMode', JSON.stringify(mode));
 
     setTimeout(() => {
-        window.open(gamePage, '_self')
+        window.open(gamePage, '_self');
     }, 10)
-})
+}
