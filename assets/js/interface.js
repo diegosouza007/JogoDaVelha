@@ -6,32 +6,62 @@ document.addEventListener('DOMContentLoaded', () => {
     let cells = document.querySelectorAll('.cell');
 
     cells.forEach(cell => {
-        cell.addEventListener('click', handleClick);
+        cell.addEventListener('click', playPlayerTurn);
     })
 })
 
-function handleClick(event) {
+// ---------------- PLAYER FUNCTION ---------------- //
 
-    let cell = event.target;
-    let position = cell.getAttribute('id');
 
-    if (controls.isGameOver) {
-        return;
-    }
+function playPlayerTurn(event) {
 
-    handleMove(position);
-    insertSymbolOnBoard();
-    toggleBoardHoverSymbol();
+    let position = event.target.id;
 
-    if (gameMode === 'pve') {
-        playBotTurn();
-    }
+    playGame(position).
+    then(() => {
+        if (gameMode === 'pve') {
+            playBotTurn();
+        }
+    })
 }
 
-// Function on being called, put X or O when clicking on a cell 
+// ------------------ BOT FUNCTION ------------------ //
 
 
-function insertSymbolOnBoard() {
+function playBotTurn() {
+
+    let position = getRandomNumber();
+
+    playGame(position);
+    checkStatusGame();
+}
+
+/** Receive the variable board and return a random positon according
+ *          with the empty postions avaible in array
+ **/
+
+
+let getRandomNumber = function() {
+
+    let [position, number, emptyPositions] = ['', '', ''];
+
+    let newArray = controls.board.map((value, index) => {
+        if (value === '') {
+            emptyPositions += index;
+        };
+    })
+
+    newArray = Array.from(emptyPositions);
+    position = Math.floor(Math.random() * newArray.length);
+    number = newArray[position];
+
+    return number;
+}
+
+// Read the array board updated and insert in cells the X or O flags 
+
+
+function loadFlagsOnBoard() {
 
     let cells = document.querySelectorAll('.cell');
 
@@ -46,19 +76,13 @@ function insertSymbolOnBoard() {
     })
 
     controls.isGameOver = isWinner();
-
-
-    if (isTiedGame()) {
-        setTimeout(() => { resetGame(); }, 2000);
-    }
-
-
+    checkStatusGame();
 }
 
 // Switch between X or O the hover effect in the cells 
 
 
-function toggleBoardHoverSymbol() {
+function toggleBoardHoverFlag() {
 
     let board = document.querySelector('.board');
 
@@ -71,7 +95,7 @@ function toggleBoardHoverSymbol() {
     }
 }
 
-// Clear all cells and start a new game
+// Clear all cells and start a new round
 
 
 function resetGame() {
@@ -89,92 +113,37 @@ function resetGame() {
         board.classList.add('x');
     }
 
-    clearVariables();
+    resetVariables();
 }
 
-// Check if there is a winner
+// Run the player/BOT action
 
+function playGame(position) {
 
-function isWinner() {
-
-    for (let i = 0; i < winnerSequences.length; i++) {
-
-        let number = winnerSequences[i];
-
-        let firstNumber = number[0];
-        let secondNumber = number[1];
-        let thirdNumber = number[2];
-
-        if (controls.board[firstNumber] == controls.board[secondNumber] &&
-            controls.board[firstNumber] == controls.board[thirdNumber] &&
-            controls.board[firstNumber] != '') {
-            setTimeout(() => {
-                alert(`O vencedor foi ${controls.board[firstNumber]}`)
-            }, 100);
-            return true;
-        }
-    }
-    return false;
-}
-
-// Check if there was a tied
-
-
-function isTiedGame() {
-
-    for (let i = 0; i < controls.board.length; i++) {
-        if (controls.board[i] == '') {
-            return false;
-        }
-    }
-    return true;
-}
-
-
-// ---------------- BOT FUNCTIONS ---------------- //
-
-
-function playBotTurn() {
-
-    let position = getRandomNumber();
-
-    setTimeout(() => {
-
-        if (controls.isGameOver) {
-            return;
-        }
+    let promisse = new Promise((resolve, reject) => {
 
         handleMove(position);
-        insertSymbolOnBoard();
-        toggleBoardHoverSymbol();
-    }, 1000);
+        setTimeout(() => loadFlagsOnBoard());
+        toggleBoardHoverFlag();
 
-    // return true;
+        resolve();
+
+    });
+
+    return promisse;
 }
 
-/** Receive the variable board and return a random positon according
- *          with the empty postions avaible in array
- **/
+function checkStatusGame() {
 
-let getRandomNumber = function() {
+    let hasTied = isTiedGame();
 
-    let pos = '';
-    let num = '';
-    let emptyPos = '';
-    let newArr =
-
-
-        controls.board.map((value, index) => {
-            if (value === '') {
-                emptyPos += index;
-            };
-        })
-
-    newArr = Array.from(emptyPos);
-
-    pos = Math.floor(Math.random() * newArr.length);
-
-    num = newArr[pos];
-
-    return num;
+    if (controls.isGameOver) {
+        resetGame();
+        return;
+    } else if (hasTied) {
+        resetGame();
+        return;
+    } else {
+        return false;
+    }
 }

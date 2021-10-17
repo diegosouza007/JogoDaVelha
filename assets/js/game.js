@@ -36,8 +36,44 @@ function handleMove(position) {
 // Change the main variables to default state
 
 
-function clearVariables() {
+function resetVariables() {
     controls.board = ['', '', '', '', '', '', '', '', ''];
     controls.playerTurn = 0;
     controls.isGameOver = false;
+}
+
+// Check if there is a winner
+
+
+function isWinner() {
+
+    for (let i = 0; i < winnerSequences.length; i++) {
+
+        let number = winnerSequences[i];
+
+        let pos1 = number[0];
+        let pos2 = number[1];
+        let pos3 = number[2];
+
+        if (controls.board[pos1] == controls.board[pos2] &&
+            controls.board[pos1] == controls.board[pos3] &&
+            controls.board[pos1] != '') {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Check if there was a tied
+
+
+function isTiedGame() {
+
+    for (let i = 0; i < controls.board.length; i++) {
+        if (controls.board[i] == '') {
+            return false;
+        }
+    }
+
+    if (controls.isGameOver) { return true };
 }
