@@ -6,13 +6,17 @@
 
 :root {
     font-size: 62.5%;
-    /* --gray: #303030; */
     --hover: #56b2a7;
     --dark-green: #264653;
     --green: #2a9d8f;
     --white: #f8f9fa;
     --cell-size: 12rem;
     --symbol-size: calc(var(--cell-size) * 0.9);
+}
+
+::selection,
+::-moz-selection {
+    background: transparent;
 }
 
 .content {

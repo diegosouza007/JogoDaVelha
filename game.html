@@ -22,11 +22,13 @@
 
 <body>
     <div id="cointainer">
-
+        <!-- Game Over sound effect -->
+        <audio id="gameover" src="./assets/songs/GameOverSound.ogg"></audio>
+        <!-- Back button -->
         <div id="back">
             <a href="./index.html"><img src="./assets/img/icons8-left-48.png" alt="Recomeçar novamente" title="Recomeçar novamente"></a>
         </div>
-
+        <!-- Board game -->
         <main class="board x">
             <div id="0" class="cell"></div>
             <div id="1" class="cell"></div>
@@ -38,7 +40,20 @@
             <div id="7" class="cell"></div>
             <div id="8" class="cell"></div>
         </main>
-
+        <!-- Score board -->
+        <section>
+            <div class="score">
+                <div class="player__name">
+                    <div>Player X</div>
+                    <div>Player O</div>
+                </div>
+                <div class="player__score">
+                    <span id="player-x-score">0</span>
+                    <span id="player-o-score">0</span>
+                </div>
+            </div>
+        </section>
+        <!-- Reset game button -->
         <div id="reset">
             <a><img src="./assets/img/icons8-reset-50.png" alt="Recomeçar novamente" title="Recomeçar novamente"></a>
         </div>

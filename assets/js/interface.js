@@ -1,5 +1,10 @@
+const gameOverSound = document.getElementById('gameover');
 const resetButton = document.getElementById('reset');
+const playerX = document.getElementById('player-x-score');
+const playerO = document.getElementById('player-o-score');
+
 resetButton.addEventListener('click', resetGame);
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -10,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-// ---------------- PLAYER FUNCTION ---------------- //
+// ---------------- PLAYER ACTION ---------------- //
 
 
 function playPlayerTurn(event) {
@@ -22,18 +27,20 @@ function playPlayerTurn(event) {
         if (gameMode === 'pve') {
             playBotTurn();
         }
-    })
+    }).then(checkStatusGame);
 }
 
-// ------------------ BOT FUNCTION ------------------ //
+// ------------------ BOT ACTION ------------------ //
 
 
 function playBotTurn() {
 
     let position = getRandomNumber();
 
-    playGame(position);
-    checkStatusGame();
+    setTimeout(() => {
+        playGame(position).
+        then(checkStatusGame);
+    }, 250)
 }
 
 /** Receive the variable board and return a random positon according
@@ -76,7 +83,7 @@ function loadFlagsOnBoard() {
     })
 
     controls.isGameOver = isWinner();
-    checkStatusGame();
+    setTimeout(() => checkStatusGame(), 25);
 }
 
 // Switch between X or O the hover effect in the cells 
@@ -136,14 +143,38 @@ function playGame(position) {
 function checkStatusGame() {
 
     let hasTied = isTiedGame();
+    let who = controls.playerTurn;
 
     if (controls.isGameOver) {
-        resetGame();
-        return;
+        setTimeout(() => {
+
+            updateScore(who)
+            gameOverSound.play();
+
+            setTimeout(() => {
+                resetGame();
+                return;
+            }, 160);
+        }, 650)
     } else if (hasTied) {
-        resetGame();
-        return;
+        setTimeout(() => {
+
+            gameOverSound.play();
+
+            setTimeout(() => {
+                resetGame();
+                return;
+            }, 160);
+        }, 650)
     } else {
         return false;
     }
+}
+
+function updateScore(player) {
+
+    player === 0 ? controls.score[0]++ : controls.score[1]++;
+
+    playerX.innerHTML = controls.score[0];
+    playerO.innerHTML = controls.score[1];
 }

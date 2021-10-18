@@ -23,6 +23,8 @@ body {
 
 #container {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -31,6 +33,9 @@ body {
 a {
     cursor: pointer;
 }
+
+
+/* Board game */
 
 .board {
     display: grid;
@@ -124,4 +129,57 @@ a {
 .cell.x,
 .cell.o {
     cursor: not-allowed;
+}
+
+
+/* Score board */
+
+section {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    font: 700 2rem 'Roboto', sans;
+    ;
+}
+
+section>div {
+    margin-top: 5rem;
+    border: .5rem solid var(--dark-green);
+}
+
+.player__name {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-bottom: .5rem solid var(--dark-green);
+    background: var(--white);
+    color: var(--dark-green);
+}
+
+.player__name>div:last-child {
+    border-left: .5rem solid var(--dark-green);
+}
+
+.player__name>div {
+    width: 100%;
+    text-align: center;
+}
+
+.player__score {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: var(--white);
+}
+
+.player__score>span:last-child {
+    border-left: .5rem solid var(--dark-green);
+}
+
+.player__score>span {
+    width: 100%;
+    text-align: center;
 }
