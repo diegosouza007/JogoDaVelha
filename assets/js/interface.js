@@ -1,11 +1,15 @@
+// DOM references
+
+
 const gameOverSound = document.getElementById('gameover');
 const resetButton = document.getElementById('reset');
 const playerX = document.getElementById('player-x-score');
 const playerO = document.getElementById('player-o-score');
 
+// Listeners
+
+
 resetButton.addEventListener('click', resetGame);
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
     let cells = document.querySelectorAll('.cell');
@@ -44,7 +48,7 @@ function playBotTurn() {
 }
 
 /** Receive the variable board and return a random positon according
- *          with the empty postions avaible in array
+ *          with the empty positions available in array
  **/
 
 
@@ -83,7 +87,7 @@ function loadFlagsOnBoard() {
     })
 
     controls.isGameOver = isWinner();
-    setTimeout(() => checkStatusGame(), 25);
+    setTimeout(() => checkStatusGame(), 250);
 }
 
 // Switch between X or O the hover effect in the cells 
@@ -105,7 +109,7 @@ function toggleBoardHoverFlag() {
 // Clear all cells and start a new round
 
 
-function resetGame() {
+function nextRound() {
 
     let board = document.querySelector('.board');
     let cells = document.querySelectorAll('.cell');
@@ -120,10 +124,11 @@ function resetGame() {
         board.classList.add('x');
     }
 
-    resetVariables();
+    clearBoard();
 }
 
 // Run the player/BOT action
+
 
 function playGame(position) {
 
@@ -140,19 +145,24 @@ function playGame(position) {
     return promisse;
 }
 
+// Verify if the game is endded or tied 
+
+
 function checkStatusGame() {
 
     let hasTied = isTiedGame();
-    let who = controls.playerTurn;
+    let player = controls.playerTurn;
+
+    console.log(player);
 
     if (controls.isGameOver) {
         setTimeout(() => {
 
-            updateScore(who)
+            updateScore(player)
             gameOverSound.play();
 
             setTimeout(() => {
-                resetGame();
+                nextRound();
                 return;
             }, 160);
         }, 650)
@@ -162,7 +172,7 @@ function checkStatusGame() {
             gameOverSound.play();
 
             setTimeout(() => {
-                resetGame();
+                nextRound();
                 return;
             }, 160);
         }, 650)
@@ -171,9 +181,23 @@ function checkStatusGame() {
     }
 }
 
-function updateScore(player) {
+// Update score count board
 
-    player === 0 ? controls.score[0]++ : controls.score[1]++;
+
+function updateScore(who) {
+
+    who === 1 ? controls.score[0]++ : controls.score[1]++;
+
+    playerX.innerHTML = controls.score[0];
+    playerO.innerHTML = controls.score[1];
+}
+
+// Reset game, score and start a new game
+
+
+function resetGame() {
+
+    resetVariables();
 
     playerX.innerHTML = controls.score[0];
     playerO.innerHTML = controls.score[1];

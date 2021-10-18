@@ -40,6 +40,16 @@ function resetVariables() {
     controls.board = ['', '', '', '', '', '', '', '', ''];
     controls.playerTurn = 0;
     controls.isGameOver = false;
+    controls.score = [0, 0];
+}
+
+// Clear board to the next round
+
+
+function clearBoard() {
+    controls.board = ['', '', '', '', '', '', '', '', ''];
+    controls.playerTurn = 0;
+    controls.isGameOver = false;
 }
 
 // Check if there is a winner
@@ -49,11 +59,11 @@ function isWinner() {
 
     for (let i = 0; i < winnerSequences.length; i++) {
 
-        let number = winnerSequences[i];
+        let seq = winnerSequences[i];
 
-        let pos1 = number[0];
-        let pos2 = number[1];
-        let pos3 = number[2];
+        let pos1 = seq[0];
+        let pos2 = seq[1];
+        let pos3 = seq[2];
 
         if (controls.board[pos1] == controls.board[pos2] &&
             controls.board[pos1] == controls.board[pos3] &&
@@ -64,7 +74,7 @@ function isWinner() {
     return false;
 }
 
-// Check if there was a tied
+// Check if there was a tied game
 
 
 function isTiedGame() {
