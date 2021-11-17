@@ -12,6 +12,7 @@
     --white: #f8f9fa;
     --cell-size: 12rem;
     --symbol-size: calc(var(--cell-size) * 0.9);
+    background: var(--green);
 }
 
 ::selection,
@@ -28,18 +29,19 @@
     background: var(--green);
     width: 100vw;
     height: 100vh;
+    min-width: 400px;
 }
 
 #title {
     color: var(--white);
     font-family: 'Permanent Marker', cursive;
-    font-size: 8rem;
+    font-size: clamp(7.5vh, 8rem, 12vh);
     font-weight: 700;
 }
 
 header {
-    display: flex;
-    margin: 3rem 0 7rem 0;
+    width: 100%;
+    text-align: center;
 }
 
 button {
@@ -98,7 +100,7 @@ button {
     height: 100%;
     visibility: visible;
     opacity: 1;
-    background: rgba(35, 35, 35, 0.9);
+    background: var(--green);
 }
 
 .menu-modal.active>div {
@@ -139,4 +141,47 @@ button {
 .menu-modal.active span:hover {
     color: var(--green);
     filter: brightness(1.2);
+}
+
+@media screen and (max-width: 768px) {
+    #play {
+        height: 5rem;
+        width: 13.3rem;
+    }
+    #play:hover {
+        height: 5.2rem;
+        width: 13.9rem;
+    }
+    .content {
+        width: 100vw;
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    #play {
+        margin-top: 11rem;
+    }
+    .content {
+        width: 100vw;
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #play {
+        height: 7rem;
+        width: 18.7rem;
+    }
+    #play:hover {
+        height: 7.2rem;
+        width: 19.2rem;
+    }
+    /* body {
+        height: 100vh;
+    } */
+    .content {
+        width: 100vw;
+        height: 100vh;
+    }
 }

@@ -1,6 +1,3 @@
-// To manipulete DOM in index.html
-
-
 const music = document.getElementById('music');
 const volume = document.getElementById('volume');
 const play = document.getElementById('play');
@@ -14,15 +11,15 @@ const pvp = document.getElementById('option-pvp');
 
 
 const soundPlay = document.getElementById('sound-play');
-const pveHover = document.getElementById('select-pve');
-const pvpHover = document.getElementById('select-pvp');
+const pveHover = document.getElementById('hover-pve');
+const pvpHover = document.getElementById('hover-pvp');
 
 // Content PATH
 
 
 let volumeOn = "./assets/img/icons8-audio-50.png";
 let volumeOff = "./assets/img/icons8-no-audio-50.png";
-let gamePage = "game.html"
+let gamePageUrl = "game.html"
 
 
 // Sound controll for the main theme song 
@@ -70,22 +67,19 @@ pvp.addEventListener('mouseover', () => {
     pvpHover.play();
 })
 
-// Open tic tac toe game in the selected mode
-
-
 pve.addEventListener('click', () => {
-    loadGamePage("pve");
+    loadGamePageInMode("pve");
 })
 
 pvp.addEventListener('click', () => {
-    loadGamePage("pvp");
+    loadGamePageInMode("pvp");
 })
 
-function loadGamePage(mode) {
+function loadGamePageInMode(mode) {
 
-    localStorage.setItem('GameMode', JSON.stringify(mode));
+    localStorage.setItem('@tictactoe:gamemode', JSON.stringify(mode));
 
     setTimeout(() => {
-        window.open(gamePage, '_self');
+        window.open(gamePageUrl, '_self');
     }, 10)
 }

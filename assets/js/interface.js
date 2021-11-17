@@ -1,13 +1,7 @@
-// DOM references
-
-
 const gameOverSound = document.getElementById('gameover');
 const resetButton = document.getElementById('reset');
 const playerX = document.getElementById('player-x-score');
 const playerO = document.getElementById('player-o-score');
-
-// Listeners
-
 
 resetButton.addEventListener('click', resetGame);
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,58 +13,47 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-// ---------------- PLAYER ACTION ---------------- //
-
-
 function playPlayerTurn(event) {
 
     let position = event.target.id;
 
-    playGame(position).
-    then(() => {
-        if (gameMode === 'pve') {
-            playBotTurn();
-        }
-    }).then(checkStatusGame);
+    playGame(position)
+        .then(() => {
+            if (gameMode === 'pve') {
+                playBotTurn();
+            }
+        })
+        .then(checkStatusGame);
 }
-
-// ------------------ BOT ACTION ------------------ //
-
 
 function playBotTurn() {
 
     let position = getRandomNumber();
 
-    setTimeout(() => {
-        playGame(position).
-        then(checkStatusGame);
-    }, 250)
+    if (!controls.isGameOver) {
+        setTimeout(() => {
+            playGame(position)
+                .then(checkStatusGame);
+        }, 50)
+    }
 }
-
-/** Receive the variable board and return a random positon according
- *          with the empty positions available in array
- **/
-
 
 let getRandomNumber = function() {
 
-    let [position, number, emptyPositions] = ['', '', ''];
+    let [pos, number, emptyPos] = ['', '', ''];
 
-    let newArray = controls.board.map((value, index) => {
-        if (value === '') {
-            emptyPositions += index;
+    let newArr = controls.board.map((position, index) => {
+        if (position === '') {
+            emptyPos += index;
         };
     })
 
-    newArray = Array.from(emptyPositions);
-    position = Math.floor(Math.random() * newArray.length);
-    number = newArray[position];
+    newArr = Array.from(emptyPos);
+    pos = Math.floor(Math.random() * newArr.length);
+    number = newArr[pos];
 
     return number;
 }
-
-// Read the array board updated and insert in cells the X or O flags 
-
 
 function loadFlagsOnBoard() {
 
@@ -87,11 +70,7 @@ function loadFlagsOnBoard() {
     })
 
     controls.isGameOver = isWinner();
-    setTimeout(() => checkStatusGame(), 250);
 }
-
-// Switch between X or O the hover effect in the cells 
-
 
 function toggleBoardHoverFlag() {
 
@@ -105,9 +84,6 @@ function toggleBoardHoverFlag() {
         board.classList.add('x');
     }
 }
-
-// Clear all cells and start a new round
-
 
 function nextRound() {
 
@@ -127,75 +103,71 @@ function nextRound() {
     clearBoard();
 }
 
-// Run the player/BOT action
-
-
 function playGame(position) {
 
     let promisse = new Promise((resolve, reject) => {
 
+        if (controls.board[position] != '') {
+            return;
+        }
+
         handleMove(position);
-        setTimeout(() => loadFlagsOnBoard());
+        loadFlagsOnBoard();
         toggleBoardHoverFlag();
 
         resolve();
-
     });
 
     return promisse;
 }
-
-// Verify if the game is endded or tied 
-
 
 function checkStatusGame() {
 
     let hasTied = isTiedGame();
     let player = controls.playerTurn;
 
-    console.log(player);
-
     if (controls.isGameOver) {
+
+        gameOverSound.play();
+        updateScore(player);
+
         setTimeout(() => {
-
-            updateScore(player)
-            gameOverSound.play();
-
-            setTimeout(() => {
-                nextRound();
-                return;
-            }, 160);
-        }, 650)
+            nextRound();
+            return;
+        }, 320);
     } else if (hasTied) {
+
+        gameOverSound.play();
+
         setTimeout(() => {
-
-            gameOverSound.play();
-
-            setTimeout(() => {
-                nextRound();
-                return;
-            }, 160);
-        }, 650)
-    } else {
-        return false;
+            nextRound();
+            return;
+        }, 320);
     }
 }
 
-// Update score count board
+function updateScore(player) {
 
-
-function updateScore(who) {
-
-    who === 1 ? controls.score[0]++ : controls.score[1]++;
+    player === 1 ? controls.score[0]++ : controls.score[1]++;
 
     playerX.innerHTML = controls.score[0];
     playerO.innerHTML = controls.score[1];
 }
 
-// Reset game, score and start a new game
-
-
 function resetGame() {
+
+    let board = document.querySelector('.board');
+    let cells = document.querySelectorAll('.cell');
+
+    cells.forEach(cell => {
+        cell.classList.remove('x');
+        cell.classList.remove('o');
+    })
+
+    if (board.classList.contains('o')) {
+        board.classList.remove('o');
+        board.classList.add('x');
+    }
 
     resetVariables();
 

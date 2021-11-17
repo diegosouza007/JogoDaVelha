@@ -7,6 +7,7 @@ body {
     background: var(--green);
     width: 100vw;
     height: 100vh;
+    min-width: 400px;
 }
 
 #reset {
@@ -28,6 +29,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    width: 100%;
 }
 
 a {
@@ -164,6 +166,7 @@ section>div {
 .player__name>div {
     width: 100%;
     text-align: center;
+    padding: .4rem 0 .4rem 0;
 }
 
 .player__score {
@@ -182,4 +185,30 @@ section>div {
 .player__score>span {
     width: 100%;
     text-align: center;
+    padding: .8rem 0 .8rem 0;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 5rem;
+    }
+    #reset {
+        position: absolute;
+        right: .5rem;
+        top: 3rem;
+    }
+    #reset img {
+        width: 3.5rem;
+    }
+    #back {
+        position: absolute;
+        left: 3.2rem;
+        top: 2.5rem;
+    }
+    #back img {
+        width: 4.6rem;
+    }
+    .cell {
+        cursor: auto;
+    }
 }

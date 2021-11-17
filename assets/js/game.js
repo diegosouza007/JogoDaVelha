@@ -1,5 +1,4 @@
-// PlayerTurn: The Player is 0 value and BOT is 1 value
-
+let gameMode = JSON.parse(localStorage.getItem('@tictactoe:gamemode'));
 
 let controls = {
     board: ['', '', '', '', '', '', '', '', ''],
@@ -8,11 +7,6 @@ let controls = {
     isGameOver: false,
     score: [0, 0]
 }
-
-// Receive the selected mode: PvE or PvP
-
-
-let gameMode = JSON.parse(localStorage.getItem("GameMode"));
 
 const winnerSequences = [
     [0, 1, 2],
@@ -25,16 +19,10 @@ const winnerSequences = [
     [2, 4, 6],
 ];
 
-// Add the flags in the board and change the game turn
-
-
 function handleMove(position) {
     controls.board[position] = controls.flags[controls.playerTurn];
     controls.playerTurn === 0 ? controls.playerTurn = 1 : controls.playerTurn = 0;
 }
-
-// Change the main variables to default state
-
 
 function resetVariables() {
     controls.board = ['', '', '', '', '', '', '', '', ''];
@@ -43,17 +31,11 @@ function resetVariables() {
     controls.score = [0, 0];
 }
 
-// Clear board to the next round
-
-
 function clearBoard() {
     controls.board = ['', '', '', '', '', '', '', '', ''];
     controls.playerTurn = 0;
     controls.isGameOver = false;
 }
-
-// Check if there is a winner
-
 
 function isWinner() {
 
@@ -74,16 +56,11 @@ function isWinner() {
     return false;
 }
 
-// Check if there was a tied game
-
-
 function isTiedGame() {
 
-    for (let i = 0; i < controls.board.length; i++) {
-        if (controls.board[i] == '') {
-            return false;
-        }
+    if (controls.board.includes('')) {
+        return false;
+    } else {
+        return true;
     }
-
-    if (controls.isGameOver) { return true };
 }

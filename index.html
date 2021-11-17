@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!-- CSS -->
     <link rel="stylesheet" href="./assets/css/main.css">
     <!-- JavaScript -->
@@ -21,28 +22,27 @@
 
 <body>
     <div class="content">
-        <!-- Volume control -->
+
         <div>
             <img id="volume" src="./assets/img/icons8-no-audio-50.png" alt="Sound Volume" width="32px" height="32px">
             <audio muted id="music" src="./assets/songs/Ninja-Toad.ogg"></audio>
         </div>
-        <!-- Game title -->
+
         <header>
             <h1 id="title">Jogo da Velha</h1>
         </header>
-        <!-- Play Button -->
+
         <button id="play">PLAY
             <audio id="sound-play" src="./assets/songs/play-sound-effect.ogg"></audio>
         </button>
 
-        <!-- Modal - Choose an option (BOT or PvP) -->
         <div class="menu-modal">
             <span id="close">X</span>
             <div id="option-pve">Jogar contra um BOT - PvE
-                <audio id="select-pve" src="./assets/songs/select-mode.ogg"></audio>
+                <audio id="hover-pve" src="./assets/songs/select-mode.ogg"></audio>
             </div>
             <div id="option-pvp">Jogar contra um amigo - PvP
-                <audio id="select-pvp" src="./assets/songs/select-mode.ogg"></audio></div>
+                <audio id="hover-pvp" src="./assets/songs/select-mode.ogg"></audio></div>
         </div>
     </div>
 </body>
