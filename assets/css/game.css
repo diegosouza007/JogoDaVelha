@@ -212,3 +212,11 @@ section>div {
         cursor: auto;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .board.o .cell:not(.x):not(.o):hover::before,
+    .board.x .cell:not(.x):not(.o):hover::before,
+    .board.x .cell:not(.x):not(.o):hover::after {
+        background-color: transparent;
+    }
+}
