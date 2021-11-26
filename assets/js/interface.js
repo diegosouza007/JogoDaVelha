@@ -1,7 +1,7 @@
 const gameOverSound = document.getElementById('gameover');
 const resetButton = document.getElementById('reset');
-const playerX = document.getElementById('player-x-score');
-const playerO = document.getElementById('player-o-score');
+const playerXScore = document.getElementById('player-x-score');
+const playerOScore = document.getElementById('player-o-score');
 
 resetButton.addEventListener('click', resetGame);
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,31 +28,14 @@ function playPlayerTurn(event) {
 
 function playBotTurn() {
 
-    let position = getRandomNumber();
+    let position = getRandomAvailablePosition();
 
-    if (!controls.isGameOver) {
+    if (!CONTROLS.isGameOver) {
         setTimeout(() => {
             playGame(position)
                 .then(checkStatusGame);
         }, 50)
     }
-}
-
-let getRandomNumber = function() {
-
-    let [pos, number, emptyPos] = ['', '', ''];
-
-    let newArr = controls.board.map((position, index) => {
-        if (position === '') {
-            emptyPos += index;
-        };
-    })
-
-    newArr = Array.from(emptyPos);
-    pos = Math.floor(Math.random() * newArr.length);
-    number = newArr[pos];
-
-    return number;
 }
 
 function loadFlagsOnBoard() {
@@ -62,14 +45,14 @@ function loadFlagsOnBoard() {
     cells.forEach(cell => {
 
         let position = cell.getAttribute('id');
-        let flag = controls.board[position];
+        let flag = CONTROLS.board[position];
 
         if (flag != '') {
             cell.classList.add(flag);
         }
     })
 
-    controls.isGameOver = isWinner();
+    CONTROLS.isGameOver = isWinner();
 }
 
 function toggleBoardHoverFlag() {
@@ -107,7 +90,7 @@ function playGame(position) {
 
     let promisse = new Promise((resolve, reject) => {
 
-        if (controls.board[position] != '') {
+        if (CONTROLS.board[position] != '') {
             return;
         }
 
@@ -124,9 +107,9 @@ function playGame(position) {
 function checkStatusGame() {
 
     let hasTied = isTiedGame();
-    let player = controls.playerTurn;
+    let player = CONTROLS.playerTurn;
 
-    if (controls.isGameOver) {
+    if (CONTROLS.isGameOver) {
 
         gameOverSound.play();
         updateScore(player);
@@ -148,10 +131,10 @@ function checkStatusGame() {
 
 function updateScore(player) {
 
-    player === 1 ? controls.score[0]++ : controls.score[1]++;
+    player === 1 ? CONTROLS.score[0]++ : CONTROLS.score[1]++;
 
-    playerX.innerHTML = controls.score[0];
-    playerO.innerHTML = controls.score[1];
+    playerXScore.innerHTML = CONTROLS.score[0];
+    playerOScore.innerHTML = CONTROLS.score[1];
 }
 
 function resetGame() {
@@ -171,6 +154,6 @@ function resetGame() {
 
     resetVariables();
 
-    playerX.innerHTML = controls.score[0];
-    playerO.innerHTML = controls.score[1];
+    playerXScore.innerHTML = CONTROLS.score[0];
+    playerOScore.innerHTML = CONTROLS.score[1];
 }

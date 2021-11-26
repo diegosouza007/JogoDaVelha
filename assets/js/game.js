@@ -1,6 +1,6 @@
 let gameMode = JSON.parse(localStorage.getItem('@tictactoe:gamemode'));
 
-let controls = {
+const CONTROLS = {
     board: ['', '', '', '', '', '', '', '', ''],
     playerTurn: 0,
     flags: ['x', 'o'],
@@ -20,21 +20,21 @@ const winnerSequences = [
 ];
 
 function handleMove(position) {
-    controls.board[position] = controls.flags[controls.playerTurn];
-    controls.playerTurn === 0 ? controls.playerTurn = 1 : controls.playerTurn = 0;
+    CONTROLS.board[position] = CONTROLS.flags[CONTROLS.playerTurn];
+    CONTROLS.playerTurn === 0 ? CONTROLS.playerTurn = 1 : CONTROLS.playerTurn = 0;
 }
 
 function resetVariables() {
-    controls.board = ['', '', '', '', '', '', '', '', ''];
-    controls.playerTurn = 0;
-    controls.isGameOver = false;
-    controls.score = [0, 0];
+    CONTROLS.board = ['', '', '', '', '', '', '', '', ''];
+    CONTROLS.playerTurn = 0;
+    CONTROLS.isGameOver = false;
+    CONTROLS.score = [0, 0];
 }
 
 function clearBoard() {
-    controls.board = ['', '', '', '', '', '', '', '', ''];
-    controls.playerTurn = 0;
-    controls.isGameOver = false;
+    CONTROLS.board = ['', '', '', '', '', '', '', '', ''];
+    CONTROLS.playerTurn = 0;
+    CONTROLS.isGameOver = false;
 }
 
 function isWinner() {
@@ -47,9 +47,9 @@ function isWinner() {
         let pos2 = seq[1];
         let pos3 = seq[2];
 
-        if (controls.board[pos1] == controls.board[pos2] &&
-            controls.board[pos1] == controls.board[pos3] &&
-            controls.board[pos1] != '') {
+        if (CONTROLS.board[pos1] == CONTROLS.board[pos2] &&
+            CONTROLS.board[pos1] == CONTROLS.board[pos3] &&
+            CONTROLS.board[pos1] != '') {
             return true;
         }
     }
@@ -58,9 +58,31 @@ function isWinner() {
 
 function isTiedGame() {
 
-    if (controls.board.includes('')) {
+    if (CONTROLS.board.includes('')) {
         return false;
     } else {
         return true;
     }
+}
+
+function availablePositions() {
+
+    let arr = CONTROLS.board.filter(p => p === '');
+    return arr
+}
+
+let getRandomAvailablePosition = function() {
+
+    let [pos, number, newArr] = ['', '', []];
+
+    CONTROLS.board.map((pos, index) => {
+        if (pos === '') {
+            newArr.push(index);
+        };
+    })
+
+    pos = Math.floor(Math.random() * newArr.length);
+    number = newArr[pos];
+
+    return number;
 }
