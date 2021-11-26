@@ -1,6 +1,6 @@
 # JogoDaVelha
 
-<p>
+<p align="center">
   <img src="https://img.shields.io/badge/made%20by-DIEGO%20SOUZA-2a9d8f?style=flat-square">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/diegosouza007/JogoDaVelha?color=2a9d8f&style=flat-square">
   <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/diegosouza007/JogoDaVelha?color=2a9d8f&style=flat-square">
@@ -26,7 +26,7 @@ Neste projeto tivemos uma introdução de como implementarmos em nosso código o
 ## Preview do projeto
 
 <img src="./assets/img/preview-desktop.png">
-<img src="./assets/img/preview-mobile.png">
+<img src="./assets/img/preview-mobile.png" width="320px">
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/11907759/143509774-8904eb38-50cc-43d9-b3f7-9e864a328f17.gif)
 
